@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "digital";
+    src: url("../fonts/Digital-Play-Italic-St-1.ttf");
+    font-display: swap;
+}
+
+:root {
+    --font-body: "SF Pro Display", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "SF Mono", "Cascadia Code", "Fira Code", "JetBrains Mono", "Consolas", monospace;
+
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-bg-hover: rgba(255, 255, 255, 0.10);
+    --glass-bg-active: rgba(255, 255, 255, 0.14);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.16);
+    --glass-blur: blur(28px) saturate(180%);
+    --glass-shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.10);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --glass-shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.22);
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 24px;
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    --zako-surface: rgba(255, 255, 255, 0.06);
+    --zako-surface-hover: rgba(255, 255, 255, 0.10);
+    --zako-border: rgba(255, 255, 255, 0.08);
+    --zako-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --zako-radius: 16px;
+    --zako-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { font-family: var(--font-body); }
+
+::-webkit-scrollbar { width: 0; }
+
+body {
+    background-color: #0a0a0f;
+    margin: 0;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+}
+
+::selection {
+    background: rgba(94, 158, 255, 0.3);
+    color: #fff;
+}
+
+.v-selection-control-group { justify-content: center; }
+.v-snackbar__content { text-align: center !important; }
+.v-card-item { padding: 0.2rem 1rem !important; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.animate-in {
+    animation: fadeInUp 0.5s var(--spring) forwards;
+    opacity: 0;
+}
