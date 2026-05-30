@@ -3,7 +3,7 @@ const config = {
 		title: '杂鱼の博客',
 		description: 'Welcome to my homepage!',
 		keywords: 'personal,homepage,website',
-		icon: '/favicon.ico'
+		icon: '/img/avatar.png'
 	},
 
 	avatar: "/img/avatar.png",
