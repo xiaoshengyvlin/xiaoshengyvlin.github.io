@@ -1,5 +1,5 @@
 <template>
-  <div class="cosmos" :style="{'--c1':color1,'--c2':color2}">
+  <div class="cosmos" :style="{'--c1':color1,'--c2':color2,transform:mobile?'scale(0.6)':'none'}">
     <div class="starfield"></div>
     <div class="core-dot"></div>
     <div class="ring ring-1"></div>
@@ -36,6 +36,7 @@
 defineProps({
   color1: { type: String, default: '#64B5F6' },
   color2: { type: String, default: '#CE93D8' },
+  mobile: { type: Boolean, default: false },
 })
 </script>
 

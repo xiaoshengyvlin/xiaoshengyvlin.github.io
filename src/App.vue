@@ -1,6 +1,9 @@
 <template>
-  <v-app class="app-root" style="overflow:hidden;" :class="{'radius-before':!xs}"
+  <v-app class="app-root" style="overflow:hidden;" :class="{'radius-before':!xs && bgImageUrl}"
   :style="xs?{height:'100%',width:'100%',top:'0',left:'0'}:(sm?{height:'98%',width:'98%',top:'1%',left:'1%'}:{height:'96.6%',width:'99%',top:'1.7%',left:'0.5%'})">
+
+    <div v-if="bgImageUrl && !videoSrc" class="app-bg" :class="{'radius-before':!xs}"
+    :style="{backgroundImage:'url('+bgImageUrl+')'}" />
 
     <transition name="fade">
       <div class="loading" v-show="isLoading"><loader /></div>
@@ -81,7 +84,7 @@
           <div class="glass-card clock-card" style="height:100%;">
             <div class="clock-time" :style="xs?{fontSize:'2.2rem'}:{fontSize:'3.2rem'}">{{ formattedTime }}</div>
             <div class="clock-date" style="font-size:1rem;">{{ formattedDate }}</div>
-            <turntable :color1="configData.color.turntablecolor1" :color2="configData.color.turntablecolor2" />
+            <turntable :color1="configData.color.turntablecolor1" :color2="configData.color.turntablecolor2" :mobile="xs||sm" />
           </div>
         </v-col>
       </v-row>
@@ -104,7 +107,7 @@
             <div class="project-actions">
               <v-btn :href="item.url" target="_blank" :text="item.go" variant="text" size="small" />
               <v-spacer />
-              <v-btn :icon="item.show?'mdi-chevron-up':'mdi-chevron-down'" variant="text" size="small" @click="item.show=!item.show;collapseOthers(key)" />
+              <v-btn :icon="item.show?'mdi-chevron-up':'mdi-chevron-down'" variant="text" size="small" @click="toggleCard(item, key)" />
             </div>
             <v-expand-transition>
               <div v-show="item.show">
@@ -118,7 +121,7 @@
 
       <!-- Footer -->
       <div class="page-footer" v-if="configData.statement.length">
-        <span v-for="s in configData.statement" :key="s">{{ s }}</span>
+        <div v-for="s in configData.statement" :key="s">{{ s }}</div>
       </div>
 
       <!-- Dock -->
@@ -157,7 +160,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
+import { ref, reactive, onMounted, onBeforeUnmount, watch, computed } from 'vue'
 import { useDisplay } from 'vuetify'
 import { useConfig } from './composables/useConfig.js'
 import { useTheme } from './composables/useTheme.js'
@@ -171,7 +174,7 @@ import tab2 from './components/tabs/tab2.vue'
 import tab3 from './components/tabs/tab3.vue'
 
 const { xs, sm } = useDisplay()
-const configData = useConfig()
+const configData = reactive(useConfig())
 const { applyColors, applyBackground } = useTheme()
 
 const isLoading = ref(true)
@@ -179,6 +182,7 @@ const isClearScreen = ref(false)
 const formattedTime = ref('')
 const formattedDate = ref('')
 const videoSrc = ref('')
+const bgImageUrl = ref('')
 const showMusic = ref(false)
 const isPlaying = ref(false)
 const playlistIndex = ref(0)
@@ -208,15 +212,15 @@ const stackIcons = [
 
 function initBackground(mobile) {
   const r = applyBackground(mobile)
-  if (r.type==='pic') { videoSrc.value=''; return r.url }
-  videoSrc.value=r.url; return ''
+  if (r.type==='pic') { videoSrc.value=''; bgImageUrl.value=r.url+'?t='+Date.now(); return bgImageUrl.value }
+  videoSrc.value=r.url; bgImageUrl.value=''; return ''
 }
 
 async function preloadAssets(imageUrl) {
   const urls = [configData.avatar, ...configData.projectcards.map(p=>p.img)]
   const proms = urls.map(u=>new Promise((res,rej)=>{const i=new Image();i.src=u;i.onload=res;i.onerror=rej}))
   await Promise.race([Promise.all(proms), new Promise(r=>setTimeout(r,2500))])
-  if (imageUrl) await new Promise((res,rej)=>{const i=new Image();i.src=imageUrl;i.onload=res;i.onerror=rej})
+  if (imageUrl) await Promise.race([new Promise((res,rej)=>{const i=new Image();i.src=imageUrl;i.onload=res;i.onerror=rej}),new Promise(r=>setTimeout(r,8000))])
   else if (vdPlayer.value) await new Promise(r=>{vdPlayer.value.onloadedmetadata=()=>setTimeout(r,200);vdPlayer.value.onerror=r})
 }
 
@@ -258,19 +262,31 @@ function prevTrack() { if(!musicInfo.value)return; playlistIndex.value=playlistI
 function onAudioEnded() { nextTrack() }
 function tick() { formattedTime.value = getFormattedTime(new Date()) }
 function collapseOthers(key) { configData.projectcards.forEach((item,i)=>{if(i!==key)item.show=false}) }
+function toggleCard(item, key) {
+  if (item.show) { item.show = false; return }
+  collapseOthers(key)
+  setTimeout(() => { item.show = true }, 450)
+}
 
 watch(isClearScreen, v=>{ if(!vdPlayer.value||!videoSrc.value)return; vdPlayer.value.style.zIndex=v?0:-100; vdPlayer.value.controls=v })
 
 onMounted(async()=>{
-  dataConsole()
-  setMeta(configData.metaData.title, configData.metaData.description, configData.metaData.keywords, configData.metaData.icon)
-  applyColors()
-  formattedDate.value=getFormattedDate(new Date()); tick(); setInterval(tick,1000)
-  const imageUrl = initBackground(xs.value)
-  await preloadAssets(imageUrl)
-  setTimeout(()=>{isLoading.value=false},350)
-  fetchMusic()
-  audioRef.value?.addEventListener('ended', onAudioEnded)
+  try {
+    dataConsole()
+    setMeta(configData.metaData.title, configData.metaData.description, configData.metaData.keywords, configData.metaData.icon)
+    applyColors()
+    formattedDate.value=getFormattedDate(new Date()); tick(); setInterval(tick,1000)
+    const imageUrl = initBackground(xs.value)
+    await preloadAssets(imageUrl)
+    setTimeout(()=>{isLoading.value=false},350)
+    fetchMusic()
+    audioRef.value?.addEventListener('ended', onAudioEnded)
+  } catch(e) {
+    console.error(e)
+    isLoading.value = false
+  } finally {
+    setTimeout(()=>{ isLoading.value = false }, 10000)
+  }
 })
 
 onBeforeUnmount(()=>{ audioRef.value?.removeEventListener('ended', onAudioEnded) })
@@ -293,11 +309,23 @@ onBeforeUnmount(()=>{ audioRef.value?.removeEventListener('ended', onAudioEnded)
   background-position: center;
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: -15;
   filter: brightness(var(--zako-brightness));
 }
 
 .app-root.radius-before::before { border-radius: 16px; }
+
+.app-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s var(--ease);
+  filter: brightness(var(--zako-brightness));
+}
+
+.app-root.radius-before .app-bg { border-radius: 16px; }
 
 .video-bg {
   position: fixed;

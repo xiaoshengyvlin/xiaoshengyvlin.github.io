@@ -1,4 +1,10 @@
 @font-face {
+    font-family: "Press Start 2P";
+    src: url("../fonts/PressStart2P-Regular.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
     font-family: "digital";
     src: url("../fonts/Digital-Play-Italic-St-1.ttf");
     font-display: swap;
@@ -74,3 +80,23 @@ body {
     animation: fadeInUp 0.5s var(--spring) forwards;
     opacity: 0;
 }
+
+.click-heart {
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    pointer-events: none;
+    transform: rotate(45deg);
+    z-index: 99999;
+}
+.click-heart::after,
+.click-heart::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    background: inherit;
+    border-radius: 50%;
+    position: fixed;
+}
+.click-heart::after { top: -10px; }
+.click-heart::before { left: -10px; }

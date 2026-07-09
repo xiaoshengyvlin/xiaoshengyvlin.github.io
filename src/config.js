@@ -16,26 +16,26 @@ const config = {
 		turntablecolor2: "#CE93D8"
 	},
 
-	brightness: 85,
-	blur: 5,
+	brightness: 66,
+	blur: 10,
 
-	tags: ['杂鱼', 'AI爱好者', '梦想写小说', '摆烂'],
+	tags: ['杂鱼', 'AI爱好者', '梦想写小说', '努力ing'],
 
 	background: {
 		pc: {
 			type: "pic",
 			datainfo: {
 				title: "随机壁纸",
-				preview: "https://t.mwm.moe/pc",
-				url: "https://t.mwm.moe/pc"
+				preview: "https://www.dmoe.cc/random.php",
+				url: "https://www.dmoe.cc/random.php"
 			},
 		},
 		mobile: {
 			type: "pic",
 			datainfo: {
 				title: "随机壁纸",
-				preview: "https://t.mwm.moe/mp",
-				url: "https://t.mwm.moe/mp"
+				preview: "https://www.dmoe.cc/random.php",
+				url: "https://www.dmoe.cc/random.php"
 			}
 		}
 	},
@@ -64,10 +64,10 @@ const config = {
 
 	wallpaper: {
 		pic: [
-			{ title: "随机壁纸", preview: "https://t.mwm.moe/pc", url: "https://t.mwm.moe/pc" },
+			{ title: "随机壁纸", preview: "https://www.dmoe.cc/random.php", url: "https://www.dmoe.cc/random.php" },
 		],
 		picMobile: [
-			{ title: "随机壁纸", preview: "https://t.mwm.moe/mp", url: "https://t.mwm.moe/mp" },
+			{ title: "随机壁纸", preview: "https://www.dmoe.cc/random.php", url: "https://www.dmoe.cc/random.php" },
 		],
 		video: [],
 		videoMobile: [],
@@ -82,9 +82,12 @@ const config = {
 		{ go:"前往", img:"/img/projects/6.png", title:"Zako-Mosaic-Tool", subtitle:"便捷的图片打码工具", text:"Python 图片马赛克处理工具，快速给敏感区域打码。", url:"https://github.com/xiaoshengyvlin/Zako-Mosaic-Tool", show:false },
 		{ go:"前往", img:"/img/projects/7.png", title:"ZaKo-Random-Roll", subtitle:"随机抽卡机", text:"基于 Danbooru 标签库的 AI 绘画 Tag 随机抽取工具。", url:"https://github.com/xiaoshengyvlin/ZaKo-Random-Roll", show:false },
 		{ go:"前往", img:"/img/projects/8.png", title:"ComfyUI-ClipAPI-ZaKo", subtitle:"大语言模型提示词", text:"通过调用硅基流动 API，用大语言模型对随机提示词进行人物固定。", url:"https://github.com/xiaoshengyvlin/ComfyUI-ClipAPI-ZaKo", show:false },
+		{ go:"前往", img:"/img/projects/9.png", title:"VPS-First", subtitle:"VPS一键初始化脚本", text:"Shell 脚本，快速完成 VPS 基础环境配置。", url:"https://github.com/xiaoshengyvlin/VPS-First", show:false },
+		{ go:"前往", img:"/img/projects/10.png", title:"ZCMU-Auto-Tool", subtitle:"ZCMU图书馆座位助手", text:"自动化图书馆座位预约，期末周除了学习干什么都好玩。", url:"https://github.com/xiaoshengyvlin/ZCMU-Auto-Tool", show:false },
+		{ go:"前往", img:"/img/projects/11.png", title:"Zako-Prompt-Tools", subtitle:"随机提示词工具箱", text:"随机提示词内嵌节点 + Danbooru 灵感预览 + Anima 自然语言优化 + AI 翻译。", url:"https://github.com/xiaoshengyvlin/Zako-Prompt-Tools", show:false },
 	],
 
-	statement: ['忙于生活，不定时更新------最新更新日期2026.5.30'],
+	statement: ['忙于生活，不定时更新------最新更新日期2026.7.9', '2026.4.16-2026.7.9'],
 }
 
 export default config

@@ -5,6 +5,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
+import { initHearts } from './utils/hearts.js'
 
 const vuetify = createVuetify({
   components,
@@ -18,3 +19,4 @@ const vuetify = createVuetify({
 const app = createApp(App)
 app.config.warnHandler = () => {}
 app.use(vuetify).mount('#app')
+initHearts()
