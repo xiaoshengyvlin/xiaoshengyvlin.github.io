@@ -85,9 +85,12 @@ const config = {
 		{ go:"前往", img:"/img/projects/9.png", title:"VPS-First", subtitle:"VPS一键初始化脚本", text:"Shell 脚本，快速完成 VPS 基础环境配置。", url:"https://github.com/xiaoshengyvlin/VPS-First", show:false },
 		{ go:"前往", img:"/img/projects/10.png", title:"ZCMU-Auto-Tool", subtitle:"ZCMU图书馆座位助手", text:"自动化图书馆座位预约，期末周除了学习干什么都好玩。", url:"https://github.com/xiaoshengyvlin/ZCMU-Auto-Tool", show:false },
 		{ go:"前往", img:"/img/projects/11.png", title:"Zako-Prompt-Tools", subtitle:"随机提示词工具箱", text:"随机提示词内嵌节点 + Danbooru 灵感预览 + Anima 自然语言优化 + AI 翻译。", url:"https://github.com/xiaoshengyvlin/Zako-Prompt-Tools", show:false },
+		{ go:"前往", img:"/img/projects/12.png", title:"ZCMU-Score-Checker", subtitle:"ZCMU查分工具", text:"自动检查 ZCMU 成绩更新，不用每天手动刷新十几遍。", url:"https://github.com/xiaoshengyvlin/ZCMU-Score-Checker", show:false },
+		{ go:"前往", img:"/img/projects/13.png", title:"Kaoyan-English-News", subtitle:"烤盐新闻单词复习", text:"2027 每日考研英语新闻单词复习工具。", url:"https://github.com/xiaoshengyvlin/Kaoyan-English-News", show:false },
+		{ go:"前往", img:"/img/projects/14.png", title:"DNS-Rules", subtitle:"DNS覆写备份", text:"个人 DNS 覆写规则备份与同步。", url:"https://github.com/xiaoshengyvlin/DNS-Rules", show:false },
 	],
 
-	statement: ['忙于生活，不定时更新------最新更新日期2026.7.9', '2026.4.16-2026.7.9'],
+	statement: ['忙于生活，不定时更新------最新更新日期2026.7.28', '2026.4.16-2026.7.28'],
 }
 
 export default config
