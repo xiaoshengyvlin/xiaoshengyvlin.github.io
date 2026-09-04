@@ -88,9 +88,12 @@ const config = {
 		{ go:"前往", img:"/img/projects/12.png", title:"ZCMU-Score-Checker", subtitle:"ZCMU查分工具", text:"自动检查 ZCMU 成绩更新，不用每天手动刷新十几遍。", url:"https://github.com/xiaoshengyvlin/ZCMU-Score-Checker", show:false },
 		{ go:"前往", img:"/img/projects/13.png", title:"Kaoyan-English-News", subtitle:"烤盐新闻单词复习", text:"2027 每日考研英语新闻单词复习工具。", url:"https://github.com/xiaoshengyvlin/Kaoyan-English-News", show:false },
 		{ go:"前往", img:"/img/projects/14.png", title:"DNS-Rules", subtitle:"DNS覆写备份", text:"个人 DNS 覆写规则备份与同步。", url:"https://github.com/xiaoshengyvlin/DNS-Rules", show:false },
+		{ go:"前往", img:"/img/projects/15.png", title:"Zako-EmbedText", subtitle:"ComfyUI嵌字节点", text:"ComfyUI 嵌字节点，可自定义嵌入水印。", url:"https://github.com/xiaoshengyvlin/Zako-EmbedText", show:false },
+		{ go:"前往", img:"/img/projects/16.png", title:"Zako-ComfyUI-extractor", subtitle:"图片工作流一键提取", text:"右键图片一键提取 ComfyUI 工作流。", url:"https://github.com/xiaoshengyvlin/Zako-ComfyUI-extractor", show:false },
+		{ go:"前往", img:"/img/projects/17.png", title:"CloudFlare-Zako-ImgHub", subtitle:"CloudFlare图床", text:"基于 CloudFlare 搭建的免费图床项目。", url:"https://github.com/xiaoshengyvlin/CloudFlare-Zako-ImgHub", show:false },
 	],
 
-	statement: ['忙于生活，不定时更新------最新更新日期2026.7.28', '2026.4.16-2026.7.28'],
+	statement: ['忙于生活，不定时更新------最新更新日期2026.9.4', '2026.4.16-2026.9.4'],
 }
 
 export default config
